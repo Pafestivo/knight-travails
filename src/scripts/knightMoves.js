@@ -1,4 +1,4 @@
-import Node from "./Node";
+import Node from './Node'
 
 const directions = [[1, 2], [-1, 2], [2, 1], [-2, 1], [-2, -1], [2, -1], [1, -2], [-1, -2]]
 
@@ -22,7 +22,7 @@ export default function knightMoves(startPos, targetPos) {
     if(node.row === targetNode.row && node.col === targetNode.col) {
       // return a new array representing the shortest path
       const shortestPath = path.map(pathNode => [pathNode.row, pathNode.col])
-      return `You made it in ${shortestPath.length -1} moves! Your path was: | ${shortestPath.join(' | ')} |`
+      return shortestPath
     }
     // if it's not the correct node, add it to the visited array and continue
     visited.add(node.getPosString())
