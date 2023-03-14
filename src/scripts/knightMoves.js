@@ -14,11 +14,17 @@ export default function knightMoves(startPos, targetPos) {
   while(queue.length) {
     // remove path from queue
     const path = queue.shift()
+    // extract the last node of the path(which is the current location of knight)
     const node = path[path.length - 1]
 
     // process node
-    if(node.row === targetNode.row && node.col === targetNode.col) return path.map(pathNode => [pathNode.row, pathNode.col])
-
+    // if it's the correct node
+    if(node.row === targetNode.row && node.col === targetNode.col) {
+      // return a new array representing the shortest path
+      const shortestPath = path.map(pathNode => [pathNode.row, pathNode.col])
+      return `You made it in ${shortestPath.length -1} moves! Your path was: | ${shortestPath.join(' | ')} |`
+    }
+    // if it's not the correct node, add it to the visited array and continue
     visited.add(node.getPosString())
 
     // add neighbors to queue
@@ -27,7 +33,7 @@ export default function knightMoves(startPos, targetPos) {
 
       // check if node is is already visited
       if(!visited.has(neighborNode.getPosString())) {
-        // if not visited, add path to neighbor node to queue
+        // if not visited, make a new array of the path + neighbor node, and push it to queue
         queue.push([...path, neighborNode])
       }
     }
@@ -53,8 +59,8 @@ function getNeighbors(row, col) {
     const neighborRow = row + rowChange
     const neighborCol = col + colChange
 
+    // Add neighbor to list of neighbors if it is within the bounds of the chessboard
     if (neighborRow > 0 && neighborRow <= 8 && neighborCol > 0 && neighborCol <= 8) {
-      // Add neighbor to list of neighbors if it is within the bounds of the chessboard
       neighbors.push([neighborRow, neighborCol])
     }
   }
