@@ -12,7 +12,7 @@ export default function knightMoves(startPos, targetPos) {
   const targetNode = new Node(targetPos[0], targetPos[1])
 
   while(queue.length) {
-    // remove path from queue
+    // dequeue first array
     const path = queue.shift()
     // extract the last node of the path(which is the current location of knight)
     const node = path[path.length - 1]
@@ -27,13 +27,13 @@ export default function knightMoves(startPos, targetPos) {
     // if it's not the correct node, add it to the visited array and continue
     visited.add(node.getPosString())
 
-    // add neighbors to queue
+    // enqueue neighbors
     for(let neighbor of getNeighbors(node.row, node.col)) {
       const neighborNode = new Node(neighbor[0], neighbor[1])
 
       // check if node is is already visited
       if(!visited.has(neighborNode.getPosString())) {
-        // if not visited, make a new array of the path + neighbor node, and push it to queue
+        // if not visited, make a new array of the path + neighbor node, and enqueue array
         queue.push([...path, neighborNode])
       }
     }
