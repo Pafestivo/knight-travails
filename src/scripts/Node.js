@@ -1,5 +1,12 @@
-export default function Node(row, col, numberOfSteps) {
+export default function Node(row, col) {
   this.row = row;
   this.col = col;
-  this.numberOfSteps = numberOfSteps;
+
+  return {
+    row,
+    col,
+    getPosString() {
+      return `${this.row}, ${this.col}`
+    }
+  }
 }
